@@ -1,4 +1,3 @@
-Residual_Power,Application_Type,Min_Security_Level,Max_Stack_Usage,Max_ROM,Min_Throughput,Algorithm
 100,A ,Low,300,17,10,Xoodyak
 90,A,Low,300,17,10,Xoodyak
 80,A,Low,300,17,10,Xoodyak
