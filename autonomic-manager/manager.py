@@ -1,4 +1,5 @@
 import logging
+import subprocess
 import time
 
 class AutonomicManager:
@@ -10,10 +11,18 @@ class AutonomicManager:
         self.interval = interval
         logging.info("Autonomic manager initialized.")
 
+    def get_power(self):
+        try:
+            cmd = ['vcgencmd', 'measure_volts', 'core']
+            output = subprocess.check_output(cmd).decode().strip()
+            voltage = output.split('=')[1].replace('V', '')
+            self.power_level = float(voltage)
+        except Exception as ex:
+            print(f"ERROR getting voltage: {ex}")
+
     def monitor(self):
         # Receive message from server
-        # Get current power level
-        # self.power_level = new_power_level
+        self.get_power()
         logging.info(f"MONITOR: Current algorithm: {self.algorithm}")
         logging.info(f"Current power level: {self.power_level}")
 
