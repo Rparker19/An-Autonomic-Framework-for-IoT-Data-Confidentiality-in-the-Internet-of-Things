@@ -24,3 +24,11 @@ Datasets, data generation script, and ML models for "An Autonomic Framework for 
 # Creating large files with dd tool
 - A file consisting of random bytes of size 1GB
 $ dd if=/dev/urandom of=test.bin bs=1M count=1000
+
+
+# Kasa Commands for TPLINK Smart Power Strip - HS300
+- Getting all the socket aliases. There are 6 sockets on this power strip. 
+$ kasa --verbose --host 192.168.11.105 --type strip device alias 
+
+- Setting the alias/name of a specific socket on the strip to "rpi3b":
+$ kasa --verbose --host 192.168.11.105 --type strip device alias --child-index 5 rpi3b
