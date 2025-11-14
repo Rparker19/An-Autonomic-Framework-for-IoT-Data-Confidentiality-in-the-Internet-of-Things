@@ -6,6 +6,19 @@ import psutil
 import sys
 import time
 import tracemalloc
+from pathlib import Path
+
+# Parameters
+create_random_files = False
+number_of_files = 5
+size_of_files_in_mb = 100
+file_extension = "bin"
+output_csv = "output.csv"
+
+def create_random_files(filename, num_files, size_in_mb=100, extension="bin"):
+    for i in range(num_files):
+        with open(f"{Path(__file__).parent / f'{Path(filename).stem}_{i}.{extension}'}", "wb") as f:
+            f.write(os.urandom(size_in_mb * 1024 * 1024))
 
 def signing(alg, files):
     # Create signer and verifier
@@ -23,7 +36,8 @@ def signing(alg, files):
 
                 # Verifier verifies the signature
                 is_valid = verifier.verify(bytes, signature, signer_public_key)
-                print(f"Valid signature? {is_valid}\t|\t")
+                print(f"Valid signature ({Path(filename).name})? {is_valid}\t|\t")
+
 
 if __name__ == "__main__":
     # List of digital signing algorithms to be tested in this script
@@ -34,13 +48,21 @@ if __name__ == "__main__":
                "OV-Is", "OV-III", "OV-V"]
 
     # Output .csv file
-    f = open('output.csv', 'w')
+    f = open(Path(__file__).parent / output_csv, 'w')
+    # Write CSV header
+    f.write("Algorithm,Execution Time (s),Memory Used (MB),CPU Usage (%),Read Bytes,Write Bytes\n")
 
-    # File extension type to sign in the directory
-    file_extension = "pdf"
+    if create_random_files:
+        # Create random files for testing
+        create_random_files("testfile", number_of_files, size_of_files_in_mb, file_extension)
 
     # Grab all files with the above extension type from the directory passed as a cmd line arg
-    files = glob.glob(f"{sys.argv[1]}/*.{file_extension}")
+    #files = glob.glob(f"{sys.argv[1]}/*.{file_extension}")
+    files = glob.glob(f"{Path(__file__).parent}/*.{file_extension}")
+
+    if len(files) == 0:
+        print(f"No files with .{file_extension} extension found in the specified directory.")
+        sys.exit(1)
 
     # Get process id
     current_process = psutil.Process(os.getpid())
@@ -54,6 +76,7 @@ if __name__ == "__main__":
         start_time = time.perf_counter()
         tracemalloc.start()
         initial_io_info = current_process.io_counters()
+        initial_cpu_times = current_process.cpu_times()
 
         signing(alg, files)
 
@@ -61,27 +84,40 @@ if __name__ == "__main__":
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         final_io = current_process.io_counters()
+        final_cpu_times = current_process.cpu_times()
 
-        # Get CPU usage for the elapsed time to sign the files
-        cpu_usage = current_process.cpu_percent(interval=int(elapsed_time)) / psutil.cpu_count()
+        # Get CPU usage based on actual CPU time consumed
+        cpu_time_used = (final_cpu_times.user - initial_cpu_times.user + 
+                         final_cpu_times.system - initial_cpu_times.system)
+        cpu_usage = (cpu_time_used / elapsed_time) * 100 if elapsed_time > 0 else 0
 
         # Get peak memory usage from signing
         current_mem, peak_mem = tracemalloc.get_traced_memory()
         current_mem_mb = current_mem / (1024 * 1024)
         peak_mem_mb = peak_mem / (1024 * 1024)
 
-        # Get I/O usage
-        read_bytes = final_io.read_bytes - initial_io_info.read_bytes
-        write_bytes = final_io.write_bytes - initial_io_info.write_bytes
+        # Get I/O usage - try read_chars first (includes cached I/O)
+        try:
+            read_bytes = final_io.read_chars - initial_io_info.read_chars
+            write_bytes = final_io.write_chars - initial_io_info.write_chars
+        except AttributeError:
+            # Fallback: actual disk I/O (may be 0 if cached)
+            read_bytes = final_io.read_bytes - initial_io_info.read_bytes
+            write_bytes = final_io.write_bytes - initial_io_info.write_bytes
+            # Alternative: calculate from file sizes
+            if read_bytes == 0:
+                read_bytes = sum(os.path.getsize(f) for f in files)  # Approximate
 
         print(f"Execution time: {elapsed_time:.4f} seconds")
-        print(f"Maximum additional memory used: {peak_mem_mb - current_mem_mb:.4f} MB\n")
+        print(f"Maximum additional memory used: {peak_mem_mb - current_mem_mb:.4f} MB")
+        print(f"Read: {read_bytes} bytes, Write: {write_bytes} bytes")
+        print(f"CPU Usage: {cpu_usage:.2f}%\n")
 
         # Write to .csv file
         line += f"{elapsed_time},"
         line += f"{peak_mem_mb - current_mem_mb},"
         line += f"{cpu_usage},"
-        line += f"{read_bytes}"
+        line += f"{read_bytes},"
         line += f"{write_bytes}"
         line += "\n"
         f.write(line)

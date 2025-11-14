@@ -2,3 +2,9 @@
 .DS_Store?
 ._*
 .gitmodules
+.vscode
+.python-version
+liboqs/
+liboqs-scripts/output.csv
+liboqs-scripts/*.bin
+output.csv
