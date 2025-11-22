@@ -50,7 +50,7 @@ if __name__ == "__main__":
     # Output .csv file
     f = open(Path(__file__).parent / output_csv, 'w')
     # Write CSV header
-    f.write("Algorithm,Execution Time (s),Memory Used (MB),CPU Usage (%),Read Bytes,Write Bytes\n")
+    f.write("Algorithm,Start Time,End Time,Execution Time (s),Memory Used (MB),CPU Usage (%),Read Bytes,Write Bytes\n")
 
     if create_random_files:
         # Create random files for testing
@@ -74,6 +74,7 @@ if __name__ == "__main__":
 
         # Start timer, memory tracing, and i/o tracking
         start_time = time.perf_counter()
+        line += f"{start_time}"
         tracemalloc.start()
         initial_io_info = current_process.io_counters()
         initial_cpu_times = current_process.cpu_times()
@@ -114,6 +115,7 @@ if __name__ == "__main__":
         print(f"CPU Usage: {cpu_usage:.2f}%\n")
 
         # Write to .csv file
+        line += f"{end_time}"
         line += f"{elapsed_time},"
         line += f"{peak_mem_mb - current_mem_mb},"
         line += f"{cpu_usage},"
