@@ -28,13 +28,21 @@ from datetime import datetime
 import numpy as np
 import threading
 from queue import Queue
+import csv
+import os
 
 class EnergyMonitor:
     aliases = ["rpi3b", "rpi4b"]
-    def __init__(self, device_ip="192.168.11.105", max_points=60):
+    def __init__(self, device_ip="192.168.11.105", max_points=60, csv_filename="energy_data.csv"):
         self.device_ip = device_ip
         self.strip = IotStrip(device_ip)
         self.max_points = max_points
+        
+        # CSV file setup
+        self.csv_filename = csv_filename
+        self.csv_file = None
+        self.csv_writer = None
+        self._init_csv()
         
         # Data storage for each socket
         self.power_data = defaultdict(list)
@@ -45,6 +53,25 @@ class EnergyMonitor:
         # Queue for thread-safe data updates
         self.data_queue = Queue()
         self.running = True
+    
+    def _init_csv(self):
+        """Initialize CSV file with headers"""
+        file_exists = os.path.exists(self.csv_filename)
+        self.csv_file = open(self.csv_filename, 'a', newline='')
+        self.csv_writer = csv.writer(self.csv_file)
+        
+        # Write header if file is new
+        if not file_exists:
+            self.csv_writer.writerow(['Timestamp', 'Socket', 'Power (W)', 'Current (A)', 'Voltage (V)'])
+            self.csv_file.flush()
+    
+    def _write_to_csv(self, timestamp, socket_name, power, current, voltage):
+        """Write a single row to CSV"""
+        try:
+            self.csv_writer.writerow([timestamp, socket_name, power, current, voltage])
+            self.csv_file.flush()
+        except Exception as e:
+            print(f"Error writing to CSV: {e}")
         
     async def _update_data_async(self):
         """Fetch the latest data from the device"""
@@ -90,27 +117,36 @@ class EnergyMonitor:
         thread.start()
     
     def get_latest_data(self):
-        """Get the latest data from the queue"""
-        try:
-            while not self.data_queue.empty():
-                data = self.data_queue.get_nowait()
-                
-                for socket_name, values in data.items():
-                    self.power_data[socket_name].append(values['power'])
-                    self.current_data[socket_name].append(values['current'])
-                    self.voltage_data[socket_name].append(values['voltage'])
+            """Get the latest data from the queue and write to CSV"""
+            try:
+                while not self.data_queue.empty():
+                    data = self.data_queue.get_nowait()
+                    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     
-                    # Keep only the last max_points measurements
-                    if len(self.power_data[socket_name]) > self.max_points:
-                        self.power_data[socket_name].pop(0)
-                        self.current_data[socket_name].pop(0)
-                        self.voltage_data[socket_name].pop(0)
-                
-                self.timestamps.append(datetime.now().strftime("%H:%M:%S"))
-                if len(self.timestamps) > self.max_points:
-                    self.timestamps.pop(0)
-        except:
-            pass
+                    for socket_name, values in data.items():
+                        self.power_data[socket_name].append(values['power'])
+                        self.current_data[socket_name].append(values['current'])
+                        self.voltage_data[socket_name].append(values['voltage'])
+                        
+                        # Write to CSV
+                        self._write_to_csv(timestamp, socket_name, values['power'], values['current'], values['voltage'])
+                        
+                        # Keep only the last max_points measurements
+                        if len(self.power_data[socket_name]) > self.max_points:
+                            self.power_data[socket_name].pop(0)
+                            self.current_data[socket_name].pop(0)
+                            self.voltage_data[socket_name].pop(0)
+                    
+                    self.timestamps.append(timestamp)
+                    if len(self.timestamps) > self.max_points:
+                        self.timestamps.pop(0)
+            except:
+                pass
+        
+    def close(self):
+        """Close the CSV file"""
+        if self.csv_file:
+            self.csv_file.close()
 
 def create_plots(monitor):
     """Create the figure with three subplots for real-time visualization"""
@@ -186,7 +222,7 @@ def create_plots(monitor):
 
 def main():
     """Main function to initialize and run the monitor"""
-    monitor = EnergyMonitor(device_ip="192.168.11.105", max_points=60)
+    monitor = EnergyMonitor(device_ip="192.168.11.105", max_points=60, csv_filename="energy_data.csv")
     
     # Start background thread for data collection
     monitor.start_background_thread()
@@ -199,6 +235,7 @@ def main():
         plt.show()
     finally:
         monitor.running = False
+        monitor.close()  # Close CSV file gracefully
 
 if __name__ == "__main__":
     main()
