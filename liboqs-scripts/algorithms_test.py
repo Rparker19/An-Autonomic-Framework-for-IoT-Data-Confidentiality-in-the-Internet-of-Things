@@ -43,7 +43,7 @@ if __name__ == "__main__":
     # List of digital signing algorithms to be tested in this script
     sigalgs = ["Falcon-512", "Falcon-1024", "ML-DSA-44", "ML-DSA-65", "ML-DSA-87", "SPHINCS+-SHA2-128f-simple", "SPHINCS+-SHA2-192f-simple", "SPHINCS+-SHA2-256f-simple",
                "SLH_DSA_PURE_SHA2_128F", "SLH_DSA_PURE_SHA2_192F", "SLH_DSA_PURE_SHA2_256F", "SLH_DSA_PURE_SHAKE_128F", "SLH_DSA_PURE_SHAKE_192F", "SLH_DSA_PURE_SHAKE_256F",
-               "cross-rsdp-128-balanced", "cross-rsdp-128-fast", "cross-rsdp-128-small", "cross-rsdp-192-balanced", "cross-rsdp-192-balanced", "cross-rsdp-192-small",
+               "cross-rsdp-128-balanced", "cross-rsdp-128-fast", "cross-rsdp-128-small", "cross-rsdp-192-balanced", "cross-rsdp-192-fast", "cross-rsdp-192-small",
                "cross-rsdp-256-balanced", "cross-rsdp-256-fast", "cross-rsdp-256-small", "MAYO-1", "MAYO-2", "MAYO-3", "MAYO-5", "SNOVA_24_5_4", "SNOVA_56_25_2", "SNOVA_60_10_4",
                "OV-Is", "OV-III", "OV-V"]
 
