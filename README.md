@@ -32,3 +32,19 @@ $ kasa --verbose --host 192.168.11.105 --type strip device alias
 
 - Setting the alias/name of a specific socket on the strip to "rpi3b":
 $ kasa --verbose --host 192.168.11.105 --type strip device alias --child-index 5 rpi3b
+
+# Preparing Raspberry-Pis:
+- Install pyenv on both raspberry-pis (https://github.com/pyenv/pyenv)
+    - curl -fsSL https://pyenv.run | bash
+    - Append the following ~/.bashrc
+        export PYENV_ROOT="$HOME/.pyenv"
+        [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init - bash)"
+    - reload the ~/.bashrc
+        - $ source ~/.bashrc
+- Install same version of python on both rpis:
+    - $ pyenv install 3.10
+- After new python is installed, set it to be used globally
+    - $ pyenv versions
+    - $ pyenv global 3.10
+

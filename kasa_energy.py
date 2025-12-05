@@ -121,7 +121,8 @@ class EnergyMonitor:
             try:
                 while not self.data_queue.empty():
                     data = self.data_queue.get_nowait()
-                    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    # Higher resolution timestamp: includes milliseconds
+                    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
                     
                     for socket_name, values in data.items():
                         self.power_data[socket_name].append(values['power'])
