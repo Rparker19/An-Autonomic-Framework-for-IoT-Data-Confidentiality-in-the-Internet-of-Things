@@ -1,5 +1,9 @@
+import glob
 import joblib
 import logging
+import oqs
+import os
+from pathlib import Path
 import random
 import time
 
@@ -42,9 +46,37 @@ class AutonomicManager:
         (self.algorithm, self.current, self.voltage) = model.predict([self.power_level, self.security_level, self.security_level_friend]) # add other vars once I have a model
         logging.info(f"PLAN: Use {self.algorithm}")
 
+    def create_random_files(self, num_files, size_in_mb=100, filename="testfile", extension="bin"):
+        for i in range(num_files):
+            with open(f"{Path(__file__).parent / f'{Path(filename).stem}_{i}.{extension}'}", "wb") as f:
+                f.write(os.urandom(size_in_mb * 1024 * 1024))
+
+        return glob.glob(f"{Path(__file__).parent}/*.{extension}")
+
+    def signing(self, alg, files):
+        # Create signer and verifier
+        with oqs.Signature(alg) as signer, oqs.Signature(alg) as verifier:
+            # Signer generates its keypair
+            signer_public_key = signer.generate_keypair()
+
+            # Sign each file in the list
+            for filename in files:
+                with open(filename, 'rb') as file:
+                    bytes = file.read()
+
+                    # Signer signs the message
+                    signature = signer.sign(bytes)
+
+                    # Verifier verifies the signature
+                    is_valid = verifier.verify(bytes, signature, signer_public_key)
+                    print(f"Valid signature ({Path(filename).name})? {is_valid}\t|\t")
+
     def execute(self):
-        # Send new message
-        logging.info(f"EXECUTE: Sending signed message")
+        # Execute signing using chosen algorithm
+        num_files = random.randint(1, 10)
+        logging.info(f"EXECUTE: Signing {num_files} files")
+        files = self.create_random_files(num_files)
+        self.signing(self.algorithm, files)
 
     def loop(self):
         logging.info("Starting autonomic loop")
