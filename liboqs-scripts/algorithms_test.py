@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import datetime
 import glob
 import oqs
 import os
@@ -74,7 +75,8 @@ if __name__ == "__main__":
 
         # Start timer, memory tracing, and i/o tracking
         start_time = time.perf_counter()
-        line += f"{start_time}"
+        start_date_time = datetime.datetime.now()
+        line += f"{start_date_time}"
         tracemalloc.start()
         initial_io_info = current_process.io_counters()
         initial_cpu_times = current_process.cpu_times()
@@ -83,6 +85,7 @@ if __name__ == "__main__":
 
         # End timer
         end_time = time.perf_counter()
+        end_date_time = datetime.datetime.now()
         elapsed_time = end_time - start_time
         final_io = current_process.io_counters()
         final_cpu_times = current_process.cpu_times()
@@ -115,7 +118,7 @@ if __name__ == "__main__":
         print(f"CPU Usage: {cpu_usage:.2f}%\n")
 
         # Write to .csv file
-        line += f"{end_time}"
+        line += f"{end_date_time}"
         line += f"{elapsed_time},"
         line += f"{peak_mem_mb - current_mem_mb},"
         line += f"{cpu_usage},"
