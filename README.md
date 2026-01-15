@@ -54,5 +54,7 @@ $ kasa --verbose --host 192.168.11.105 --type strip device alias --child-index 5
 
 # Running the Experiments
 - ssh to RPI3, RPI4 and RPI5
-- go to ~/An-Autonomic-Framework-for-IoT-Data-Confidentiality-in-the-Internet-of-Things/ directory and git pull to get the latest version of the code from github.
-- 
+- go to ~/An-Autonomic-Framework-for-IoT-Data-Confidentiality-in-the-Internet-of-Things/liboqs-scripts/ directory and git pull to get the latest version of the code from github.
+- run `algorithm_test.py`
+    - This will start running each of the algorithms against 5 .bin files that are each 100 MBytes in size. It will write the signature resource statistics into a .csv file.
+- To capture the Volt/Watt usage statistics from the HS-300 Kasa smart strip, run the `kasa_energy.py` from another laptop in the same network as the power strip.

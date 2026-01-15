@@ -36,6 +36,8 @@ def signing(alg, files):
         # Signer generates its keypair
         signer_public_key = signer.generate_keypair()
 
+        total_signature_size = 0
+
         # Sign each file in the list
         for filename in files:
             with open(filename, 'rb') as file:
@@ -44,10 +46,14 @@ def signing(alg, files):
                 # Signer signs the message
                 signature = signer.sign(bytes)
 
+                # Keep track of total signature size
+                total_signature_size += len(signature)
+
                 # Verifier verifies the signature
                 is_valid = verifier.verify(bytes, signature, signer_public_key)
                 print(f"Valid signature ({Path(filename).name})? {is_valid}\t|\t")
-
+        print(f"Total signature size for algorithm {alg}: {total_signature_size} bytes")
+        return total_signature_size
 
 if __name__ == "__main__":
     # List of digital signing algorithms to be tested in this script
@@ -62,7 +68,7 @@ if __name__ == "__main__":
     output_csv = f"signing_benchmark_{rpi_model}.csv"
     f = open(Path(__file__).parent / output_csv, 'w')
     # Write CSV header
-    f.write("Algorithm,Start Time,End Time,Execution Time (s),Memory Used (MB),CPU Usage (%),Read Bytes,Write Bytes\n")
+    f.write("Algorithm,Start Time,End Time,Execution Time (s),Memory Used (MB),CPU Usage (%),Read Bytes,Write Bytes,Total Signature Size (bytes)\n")
 
     if create_random_files:
         # Create random files for testing
@@ -80,19 +86,19 @@ if __name__ == "__main__":
     current_process = psutil.Process(os.getpid())
     _ = current_process.cpu_percent()
 
-    for alg in sigalgs:
-        print(f"Algorithm: {alg}\t|\t")
+    for idx, alg in enumerate(sigalgs):
+        print(f"Algorithm ({idx}/{len(sigalgs)}): {alg}\t|\t")
         line = f"{alg},"
 
         # Start timer, memory tracing, and i/o tracking
         start_time = time.perf_counter()
         start_date_time = datetime.datetime.now()
-        line += f"{start_date_time}"
+        line += f"{start_date_time},"
         tracemalloc.start()
         initial_io_info = current_process.io_counters()
         initial_cpu_times = current_process.cpu_times()
 
-        signing(alg, files)
+        signature_size = signing(alg, files)
 
         # End timer
         end_time = time.perf_counter()
@@ -115,12 +121,15 @@ if __name__ == "__main__":
         try:
             read_bytes = final_io.read_chars - initial_io_info.read_chars
             write_bytes = final_io.write_chars - initial_io_info.write_chars
+            print(f"read_chars: {final_io.read_chars}, initial read_chars: {initial_io_info.read_chars}")
         except AttributeError:
             # Fallback: actual disk I/O (may be 0 if cached)
             read_bytes = final_io.read_bytes - initial_io_info.read_bytes
             write_bytes = final_io.write_bytes - initial_io_info.write_bytes
+            print(f"read_bytes: {final_io.read_bytes}, initial read_bytes: {initial_io_info.read_bytes}")
             # Alternative: calculate from file sizes
             if read_bytes == 0:
+                print("read_bytes was 0, calculating read_bytes from file sizes...")
                 read_bytes = sum(os.path.getsize(f) for f in files)  # Approximate
 
         print(f"Execution time: {elapsed_time:.4f} seconds")
@@ -129,12 +138,13 @@ if __name__ == "__main__":
         print(f"CPU Usage: {cpu_usage:.2f}%\n")
 
         # Write to .csv file
-        line += f"{end_date_time}"
+        line += f"{end_date_time},"
         line += f"{elapsed_time},"
         line += f"{peak_mem_mb - current_mem_mb},"
         line += f"{cpu_usage},"
         line += f"{read_bytes},"
-        line += f"{write_bytes}"
+        line += f"{write_bytes},"
+        line += f"{signature_size}"
         line += "\n"
         f.write(line)
         tracemalloc.stop()
