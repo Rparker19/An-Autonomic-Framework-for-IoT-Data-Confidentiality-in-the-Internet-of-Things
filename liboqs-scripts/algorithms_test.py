@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import datetime
 import glob
+import subprocess
 import oqs
 import os
 import psutil
@@ -14,8 +15,16 @@ create_random_files = False
 number_of_files = 5
 size_of_files_in_mb = 100
 file_extension = "bin"
-output_csv = "output.csv"
 
+
+def get_rpi_model():
+    """Get Raspberry Pi model"""
+    try:
+        result = subprocess.check_output(['cat', '/proc/device-tree/model']).decode().strip()
+        return f"rpi_{result.split()[2]}"  # Return model number
+    except:
+        return "Unknown"
+    
 def create_random_files(filename, num_files, size_in_mb=100, extension="bin"):
     for i in range(num_files):
         with open(f"{Path(__file__).parent / f'{Path(filename).stem}_{i}.{extension}'}", "wb") as f:
@@ -49,6 +58,8 @@ if __name__ == "__main__":
                "OV-Is", "OV-III", "OV-V"]
 
     # Output .csv file
+    rpi_model = get_rpi_model()
+    output_csv = f"signing_benchmark_{rpi_model}.csv"
     f = open(Path(__file__).parent / output_csv, 'w')
     # Write CSV header
     f.write("Algorithm,Start Time,End Time,Execution Time (s),Memory Used (MB),CPU Usage (%),Read Bytes,Write Bytes\n")

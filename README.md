@@ -42,9 +42,17 @@ $ kasa --verbose --host 192.168.11.105 --type strip device alias --child-index 5
         eval "$(pyenv init - bash)"
     - reload the ~/.bashrc
         - $ source ~/.bashrc
+- Install the build dependencies before installing new python versions:
+    - sudo apt update; sudo apt install make build-essential libssl-dev zlib1g-dev \
+        libbz2-dev libreadline-dev libsqlite3-dev curl git \
+        libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 - Install same version of python on both rpis:
-    - $ pyenv install 3.10
+    - $ pyenv install 3.10.19
 - After new python is installed, set it to be used globally
     - $ pyenv versions
-    - $ pyenv global 3.10
+    - $ pyenv global 3.10.19
 
+# Running the Experiments
+- ssh to RPI3, RPI4 and RPI5
+- go to ~/An-Autonomic-Framework-for-IoT-Data-Confidentiality-in-the-Internet-of-Things/ directory and git pull to get the latest version of the code from github.
+- 
