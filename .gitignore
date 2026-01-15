@@ -8,4 +8,4 @@ liboqs/
 liboqs-scripts/output.csv
 liboqs-scripts/*.bin
 output.csv
-energy_data.csv
+./energy_data.csv

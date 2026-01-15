@@ -182,7 +182,7 @@ if __name__ == "__main__":
             "Read Bytes,Write Bytes,Total Signature Size (bytes),"
             "Num Files,Total Size MB,Avg File Size MB,"
             "CPU Count,Total RAM MB,Available RAM MB,System CPU %,System Memory %,"
-            "Avg Time Per File,Throughput MB/s,Temperature C\n")
+            "Avg Time Per File,Throughput MB/s,Temp-Before, Temp-After, DeltaTemp\n")
     
     # Get device info once
     device_info = get_device_info()
@@ -284,7 +284,9 @@ if __name__ == "__main__":
         line += f"{system_state_before['memory_percent']},"
         line += f"{detailed_metrics['avg_time_per_file']},"
         line += f"{detailed_metrics['throughput_mb_per_sec']},"
-        line += f"{temp_after if temp_after else 'N/A'}"
+        line += f"{temp_before if temp_before else 'N/A'},"
+        line += f"{temp_after if temp_after else 'N/A'},"
+        line += f"{temp_change if temp_before and temp_after else 'N/A'}"
         line += "\n"
         f.write(line)
         tracemalloc.stop()
