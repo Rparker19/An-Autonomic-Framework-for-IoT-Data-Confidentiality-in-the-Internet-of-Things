@@ -32,7 +32,7 @@ import csv
 import os
 
 class EnergyMonitor:
-    aliases = ["rpi3b", "rpi4b"]
+    aliases = ["rpi3", "rpi4", "rpi5"]  # Names of the sockets to monitor
     def __init__(self, device_ip="192.168.11.105", max_points=60, csv_filename="energy_data.csv"):
         self.device_ip = device_ip
         self.strip = IotStrip(device_ip)
