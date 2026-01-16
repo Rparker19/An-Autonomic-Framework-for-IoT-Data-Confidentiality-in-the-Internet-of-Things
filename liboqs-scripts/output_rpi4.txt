@@ -1,0 +1,403 @@
+No files with .bin extension found in the specified directory. Creating the test files...
+Creating file 1/5: testfile_0.bin (10 MB)
+Creating file 2/5: testfile_1.bin (20 MB)
+Creating file 3/5: testfile_2.bin (40 MB)
+Creating file 4/5: testfile_3.bin (80 MB)
+Creating file 5/5: testfile_4.bin (160 MB)
+Created 5 files with sizes from 10 MB to 160 MB
+Algorithm (0/33): Falcon-512	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.2248 seconds
+Maximum additional memory used: 320.0012 MB
+Read: 325058991 bytes, Write: 0 bytes
+CPU Usage: 100.084%
+
+Algorithm (1/33): Falcon-1024	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 12.0927 seconds
+Maximum additional memory used: 320.0124 MB
+Read: 325058996 bytes, Write: 0 bytes
+CPU Usage: 51.849%
+
+Algorithm (2/33): ML-DSA-44	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.1653 seconds
+Maximum additional memory used: 320.0167 MB
+Read: 325058997 bytes, Write: 0 bytes
+CPU Usage: 99.914%
+
+Algorithm (3/33): ML-DSA-65	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.1665 seconds
+Maximum additional memory used: 320.0213 MB
+Read: 325058997 bytes, Write: 0 bytes
+CPU Usage: 99.895%
+
+Algorithm (4/33): ML-DSA-87	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.1596 seconds
+Maximum additional memory used: 320.0265 MB
+Read: 325058998 bytes, Write: 0 bytes
+CPU Usage: 100.007%
+
+Algorithm (5/33): SPHINCS+-SHA2-128f-simple	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 8.0752 seconds
+Maximum additional memory used: 320.0554 MB
+Read: 325059000 bytes, Write: 0 bytes
+CPU Usage: 99.812%
+
+Algorithm (6/33): SPHINCS+-SHA2-192f-simple	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.6438 seconds
+Maximum additional memory used: 320.1077 MB
+Read: 325059000 bytes, Write: 0 bytes
+CPU Usage: 99.943%
+
+Algorithm (7/33): SPHINCS+-SHA2-256f-simple	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 7.4927 seconds
+Maximum additional memory used: 320.1491 MB
+Read: 325059000 bytes, Write: 0 bytes
+CPU Usage: 99.831%
+
+Algorithm (8/33): SLH_DSA_PURE_SHA2_128F	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 9.6714 seconds
+Maximum additional memory used: 320.0532 MB
+Read: 325059000 bytes, Write: 0 bytes
+CPU Usage: 99.882%
+
+Algorithm (9/33): SLH_DSA_PURE_SHA2_192F	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 7.2781 seconds
+Maximum additional memory used: 320.1083 MB
+Read: 325059000 bytes, Write: 0 bytes
+CPU Usage: 99.889%
+
+Algorithm (10/33): SLH_DSA_PURE_SHA2_256F	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 7.7603 seconds
+Maximum additional memory used: 320.1490 MB
+Read: 325059000 bytes, Write: 0 bytes
+CPU Usage: 99.997%
+
+Algorithm (11/33): SLH_DSA_PURE_SHAKE_128F	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 11.8241 seconds
+Maximum additional memory used: 320.0550 MB
+Read: 325059000 bytes, Write: 0 bytes
+CPU Usage: 99.880%
+
+Algorithm (12/33): SLH_DSA_PURE_SHAKE_192F	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 12.1953 seconds
+Maximum additional memory used: 320.1084 MB
+Read: 325059000 bytes, Write: 0 bytes
+CPU Usage: 99.956%
+
+Algorithm (13/33): SLH_DSA_PURE_SHAKE_256F	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 13.2014 seconds
+Maximum additional memory used: 320.1464 MB
+Read: 325059000 bytes, Write: 0 bytes
+CPU Usage: 99.838%
+
+Algorithm (14/33): cross-rsdp-128-balanced	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 5.4232 seconds
+Maximum additional memory used: 320.0439 MB
+Read: 325059000 bytes, Write: 0 bytes
+CPU Usage: 100.125%
+
+Algorithm (15/33): cross-rsdp-128-fast	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 5.4133 seconds
+Maximum additional memory used: 320.0559 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.754%
+
+Algorithm (16/33): cross-rsdp-128-small	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 5.4621 seconds
+Maximum additional memory used: 320.0418 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.962%
+
+Algorithm (17/33): cross-rsdp-192-balanced	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.3066 seconds
+Maximum additional memory used: 320.0917 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.896%
+
+Algorithm (18/33): cross-rsdp-192-fast	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.2522 seconds
+Maximum additional memory used: 320.1227 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.965%
+
+Algorithm (19/33): cross-rsdp-192-small	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.3300 seconds
+Maximum additional memory used: 320.0877 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.842%
+
+Algorithm (20/33): cross-rsdp-256-balanced	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.4160 seconds
+Maximum additional memory used: 320.1597 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.906%
+
+Algorithm (21/33): cross-rsdp-256-fast	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.3322 seconds
+Maximum additional memory used: 320.2199 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.965%
+
+Algorithm (22/33): cross-rsdp-256-small	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.5219 seconds
+Maximum additional memory used: 320.1519 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.818%
+
+Algorithm (23/33): MAYO-1	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.2353 seconds
+Maximum additional memory used: 320.0103 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.755%
+
+Algorithm (24/33): MAYO-2	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.2273 seconds
+Maximum additional memory used: 320.0163 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.882%
+
+Algorithm (25/33): MAYO-3	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.3134 seconds
+Maximum additional memory used: 320.0137 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.470%
+
+Algorithm (26/33): MAYO-5	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.4256 seconds
+Maximum additional memory used: 320.0192 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.914%
+
+Algorithm (27/33): SNOVA_24_5_4	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.2231 seconds
+Maximum additional memory used: 320.0090 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.789%
+
+Algorithm (28/33): SNOVA_56_25_2	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.3512 seconds
+Maximum additional memory used: 320.0645 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.823%
+
+Algorithm (29/33): SNOVA_60_10_4	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.4845 seconds
+Maximum additional memory used: 320.0232 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.930%
+
+Algorithm (30/33): OV-Is	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.2272 seconds
+Maximum additional memory used: 321.1255 MB
+Read: 325059001 bytes, Write: 0 bytes
+CPU Usage: 99.724%
+
+Algorithm (31/33): OV-III	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.2526 seconds
+Maximum additional memory used: 323.3403 MB
+Read: 325059002 bytes, Write: 0 bytes
+CPU Usage: 99.959%
+
+Algorithm (32/33): OV-V	|	
+Valid signature (testfile_0.bin)? True	|	
+Valid signature (testfile_3.bin)? True	|	
+Valid signature (testfile_2.bin)? True	|	
+Valid signature (testfile_4.bin)? True	|	
+Valid signature (testfile_1.bin)? True	|	
+using read_chars and write_chars for I/O measurement
+Execution time: 6.4237 seconds
+Maximum additional memory used: 327.8041 MB
+Read: 325059002 bytes, Write: 0 bytes
+CPU Usage: 99.942%
+
